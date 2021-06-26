@@ -6,7 +6,7 @@
     #wishlist="addToWishlist"
     #compare="addToCompare"
 >
-    <div class="product-card__actions-list">
+    <!-- <div class="product-card__actions-list">
         <button
             class="product-card__action product-card__action--quickview"
             type="button"
@@ -36,7 +36,7 @@
                 <app-icon icon="compare-16"></app-icon>
             </button>
         </ng-container>
-    </div>
+    </div> -->
 
     <div class="product-card__image">
         <div class="image image--type--product">
@@ -82,9 +82,9 @@
 
         <div class="product-card__name">
             <div>
-                <div *ngIf="product?.badges.length > 0" class="product-card__badges">
+                <!-- <div *ngIf="product?.badges.length > 0" class="product-card__badges">
                     <div *ngFor="let badge of product.badges" class="tag-badge tag-badge--{{ badge }}">{{ badge }}</div>
-                </div>
+                </div> -->
                 <a [routerLink]="url.product(product)">{{ product.name }}</a>
             </div>
         </div>
@@ -96,7 +96,7 @@
             </div>
         </div>
 
-        <div *ngIf="!exclude.includes('features') && featuredAttributes.length > 0" class="product-card__features">
+        <!-- <div *ngIf="!exclude.includes('features') && featuredAttributes.length > 0" class="product-card__features">
             <ul>
                 <li *ngFor="let attribute of featuredAttributes">
                     {{ attribute.name }}:
@@ -105,7 +105,9 @@
                     </ng-container>
                 </li>
             </ul>
-        </div>
+        </div> -->
+
+        <!-- i comment this code due to this.featuredAttributes, to remove this data from fake data -->
     </div>
 
     <div class="product-card__footer">

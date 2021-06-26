@@ -17,21 +17,22 @@ export class MainMenuComponent {
 
     constructor(
         public header: HeaderService,
-    ) {}
+    ) {
+        console.log(mainMenu);
+    }
 
     onItemEnter(item: any): void {
         this.hoveredItem = item;
-        console.log(this.hoveredItem);
     }
 
     onItemLeave(item: any): void {
         if ( this.hoveredItem === item ) {
             this.hoveredItem = null;
-            console.log(this.hoveredItem);
         }
     }
 
     onItemClick(): void {
         this.hoveredItem = null;
     }
+
 }

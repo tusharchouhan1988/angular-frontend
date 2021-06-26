@@ -6,6 +6,9 @@ import { ProductsList, ReviewsList } from '../../interfaces/list';
 import { Review } from '../../interfaces/review';
 import { Order } from '../../interfaces/order';
 import { AddressData } from '../../interfaces/address';
+import { HeaderService } from '../../../app/services/header.service';
+import { HttpClient } from '@angular/common/http';
+
 
 export interface GetCategoryBySlugOptions {
     depth?: number;
@@ -72,6 +75,9 @@ export interface CheckoutData {
 }
 
 export abstract class ShopApi {
+
+    constructor(public headerService: HeaderService, public http : HttpClient) { }
+
     abstract getCategoryBySlug(slug: string, options?: GetCategoryBySlugOptions): Observable<ShopCategory>;
 
     abstract getCategories(options?: GetCategoriesOptions): Observable<ShopCategory[]>;
@@ -90,7 +96,8 @@ export abstract class ShopApi {
 
     abstract getRelatedProducts(productId: number, limit: number): Observable<Product[]>;
 
-    abstract getFeaturedProducts(categorySlug: string, limit: number): Observable<Product[]>;
+    //abstract getFeaturedProducts(categorySlug: string, limit: number): Observable<Product[]>;
+    abstract getFeaturedProducts(categorySlug: string, limit: number): Observable<any>;
 
     abstract getPopularProducts(categorySlug: string, limit: number): Observable<Product[]>;
 

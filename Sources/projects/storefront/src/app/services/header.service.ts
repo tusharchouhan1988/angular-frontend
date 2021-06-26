@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -33,7 +34,6 @@ export class HeaderService {
     );
 
     get desktopVariant(): string {
-        console.log(this.desktopVariantSubject$.value);
         return this.desktopVariantSubject$.value;
     }
 
@@ -49,7 +49,7 @@ export class HeaderService {
         return this.mobileVariantSubject$.value;
     }
 
-    constructor() { }
+    constructor(private httpClient: HttpClient) { }
 
     setDesktopVariant(variant: DesktopHeaderVariant): void {
         this.desktopVariantSubject$.next(variant);
@@ -58,4 +58,9 @@ export class HeaderService {
     setMobileVariant(variant: MobileHeaderVariant): void {
         this.mobileVariantSubject$.next(variant);
     }
+
+    viewAllProduct(): Observable<any>{
+        const baseUrl="http://127.0.0.1:8000/api/products/";
+        return this.httpClient.get<any>(baseUrl);
+      }
 }

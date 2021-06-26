@@ -67,18 +67,18 @@ export type ProductStock = 'in-stock' | 'out-of-stock' | 'on-backorder';
 export type ProductCompatibilityResult = 'all' | 'fit' | 'not-fit' | 'unknown';
 
 export interface Product {
-    id: number;
-    name: string;
+    id: any;
+    name: any;
     /**
      * A short product description without HTML tags.
      */
-    excerpt: string;
-    description: string;
-    slug: string;
+    excerpt?: string;
+    description?: string;
+    slug?: string;
     sku?: string;
-    partNumber: string;
-    stock: ProductStock;
-    price: number;
+    partNumber?: string;
+    stock?: ProductStock;
+    price?: number;
     compareAtPrice: number|null;
     images?: string[];
     badges?: string[];
@@ -90,12 +90,12 @@ export interface Product {
      * 'unknown' - No compatibility information. Part may not fit the specified vehicle.
      * number[]  - An array of vehicle identifiers with which this part is compatible.
      */
-    compatibility: 'all' | 'unknown' | number[];
+    compatibility?: 'all' | 'unknown' | number[];
     brand?: Brand|null;
     tags?: string[];
-    type: ProductType;
+    type?: ProductType;
     categories?: ShopCategory[];
-    attributes: ProductAttribute[];
-    options: ProductOption[];
+    attributes?: ProductAttribute[];
+    options?: ProductOption[];
     customFields?: CustomFields;
 }

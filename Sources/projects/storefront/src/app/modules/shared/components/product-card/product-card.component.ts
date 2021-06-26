@@ -29,6 +29,9 @@ export type ProductCardLayout = 'grid' | 'list' | 'table' | 'horizontal';
 export class ProductCardComponent implements OnChanges, OnInit, OnDestroy {
     private destroy$: Subject<void> = new Subject();
 
+    productList : any;
+
+
     showingQuickview = false;
 
     featuredAttributes: ProductAttribute[] = [];
@@ -42,6 +45,7 @@ export class ProductCardComponent implements OnChanges, OnInit, OnDestroy {
     @Input() exclude: ProductCardElement[] = [];
 
     @HostBinding('class.product-card') classProductCard = true;
+    
 
     @HostBinding('class.product-card--layout--grid') get classProductCardLayoutGrid(): boolean {
         return this.layout === 'grid';
@@ -64,12 +68,12 @@ export class ProductCardComponent implements OnChanges, OnInit, OnDestroy {
         private quickview: QuickviewService,
         public currency: CurrencyService,
         public url: UrlService,
-        public currentVehicle: CurrentVehicleService,
+        public currentVehicle: CurrentVehicleService
     ) { }
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.product) {
-            this.featuredAttributes = this.product.attributes.filter(x => x.featured);
+            //this.featuredAttributes = this.product.attributes.filter(x => x.featured);
         }
     }
 

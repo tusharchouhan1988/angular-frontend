@@ -1,5 +1,5 @@
-<app-block-header [breadcrumb]="breadcrumb$|async"></app-block-header>
-
+<!-- <app-block-header [breadcrumb]="breadcrumb$|async"></app-block-header> -->
+<br/><br/>
 <ng-template #sidebar>
     <app-product-sidebar class="block-split__item block-split__item-sidebar col-auto"></app-product-sidebar>
 </ng-template>
@@ -69,25 +69,29 @@
                         </div>
 
                         <div *ngIf="layout === 'full'" class="product__main">
-                            <div class="product__excerpt" *ngIf="product.excerpt">{{ product.excerpt }}</div>
+                            <!-- <div class="product__excerpt" *ngIf="product.excerpt">{{ product.excerpt }}</div> -->
+                            <div class="product__excerpt" *ngIf="product.excerpt">Product Discription if any</div>
 
                             <div class="product__features" *ngIf="featuredAttributes.length > 0">
                                 <div class="product__features-title">{{ 'TEXT_KEY_FEATURES'|translate }}:</div>
                                 <ul>
-                                    <li *ngFor="let attribute of featuredAttributes">
+                                    <!-- <li *ngFor="let attribute of featuredAttributes">
                                         {{ attribute.name }}:
                                         <span>
                                             <ng-container *ngFor="let value of attribute.values; let last = last">
                                                 {{ value.name + (!last ? ', ' : '') }}
                                             </ng-container>
                                         </span>
+                                    </li> -->
+                                    <li *ngFor="let attribute of featuredAttributes">
+                                        features if :
                                     </li>
                                 </ul>
-                                <div class="product__features-link">
+                                <!-- <div class="product__features-link">
                                     <a routerLink="./" fragment="product-tab-specification" (click)="scrollToTabs()">
                                         {{ 'LINK_SEE_FULL_SPECIFICATION'|translate }}
                                     </a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 
@@ -127,7 +131,7 @@
                                                 <th>{{ 'TABLE_SKU'|translate }}</th>
                                                 <td>{{ product.sku }}</td>
                                             </tr>
-                                            <ng-container *ngIf="product.brand">
+                                            <!-- <ng-container *ngIf="product.brand">
                                                 <tr>
                                                     <th>{{ 'TABLE_BRAND'|translate }}</th>
                                                     <td>
@@ -140,22 +144,22 @@
                                                     <th>{{ 'TABLE_COUNTRY'|translate }}</th>
                                                     <td>{{ 'COUNTRY_NAME_' + product.brand.country|translate }}</td>
                                                 </tr>
-                                            </ng-container>
-                                            <tr>
+                                            </ng-container> -->
+                                            <!-- <tr>
                                                 <th>{{ 'TABLE_PART_NUMBER'|translate }}</th>
                                                 <td>{{ product.partNumber }}</td>
-                                            </tr>
+                                            </tr> -->
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
 
-                                <app-product-form
+                                <!-- <app-product-form
                                     *ngIf="product.options.length > 0"
                                     formControlName="options"
                                     class="product__form"
                                     [options]="product.options"
-                                ></app-product-form>
+                                ></app-product-form> -->
 
                                 <div class="product__actions">
                                     <ng-container *ngIf="product.stock !== 'out-of-stock'">
@@ -173,7 +177,7 @@
                                         </div>
                                         <div class="product__actions-divider"></div>
                                     </ng-container>
-                                    <button
+                                    <!-- <button
                                         appAddToWishlist
                                         type="button"
                                         class="product__actions-item product__actions-item--wishlist"
@@ -194,20 +198,20 @@
                                     >
                                         <app-icon icon="compare-16"></app-icon>
                                         <span>{{ 'BUTTON_ADD_TO_COMPARE'|translate }}</span>
-                                    </button>
+                                    </button> -->
                                 </div>
 
-                                <div class="product__tags-and-share-links">
+                                <!-- <div class="product__tags-and-share-links">
                                     <div *ngIf="product.tags?.length > 0" class="product__tags tags tags--sm">
                                         <div class="tags__list">
                                             <a *ngFor="let tag of product.tags" routerLink="/">{{ tag }}</a>
                                         </div>
                                     </div>
                                     <app-share-links class="product__share-links"></app-share-links>
-                                </div>
+                                </div> -->
                             </div>
 
-                            <div class="product__shop-features shop-features">
+                            <!-- <div class="product__shop-features shop-features">
                                 <ul class="shop-features__list">
                                     <li class="shop-features__item">
                                         <div class="shop-features__item-icon">
@@ -250,10 +254,10 @@
                                     </li>
                                     <li class="shop-features__divider" role="presentation"></li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
 
-                        <app-product-tabs class="product__tabs" [layout]="layout" #tabs>
+                        <!-- <app-product-tabs class="product__tabs" [layout]="layout" #tabs>
                             <app-product-tab id="product-tab-description" [label]="'TEXT_TAB_DESCRIPTION'|translate">
                                 <div class="typography" [innerHTML]="product.description"></div>
                             </app-product-tab>
@@ -266,11 +270,11 @@
                             <app-product-tab id="product-tab-analogs" [label]="'TEXT_TAB_ANALOGS'|translate">
                                 <app-analogs-table [productId]="product.id"></app-analogs-table>
                             </app-product-tab>
-                        </app-product-tabs>
+                        </app-product-tabs> -->
                     </div>
                 </div>
 
-                <ng-container *ngIf="relatedProducts.length > 0">
+                <!-- <ng-container *ngIf="relatedProducts.length > 0">
                     <app-block-space layout="divider-nl"></app-block-space>
 
                     <app-block-products-carousel
@@ -278,7 +282,7 @@
                         [products]="relatedProducts"
                         [layout]="layout === 'sidebar' ? 'grid-4-sidebar' : 'grid-5'"
                     ></app-block-products-carousel>
-                </ng-container>
+                </ng-container> -->
             </div>
             <ng-container *ngIf="layout === 'sidebar' && sidebarPosition === 'end'">
                 <ng-container *ngTemplateOutlet="sidebar"></ng-container>

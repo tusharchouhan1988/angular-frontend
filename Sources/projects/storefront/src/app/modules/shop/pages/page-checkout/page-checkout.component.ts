@@ -33,21 +33,21 @@ export class PageCheckoutComponent implements OnInit, OnDestroy {
     checkoutInProgress = false;
 
     payments = [
-        {
-            name: 'bank',
-            label: 'TEXT_PAYMENT_BANK_LABEL',
-            description: 'TEXT_PAYMENT_BANK_DESCRIPTION',
-        },
-        {
-            name: 'check',
-            label: 'TEXT_PAYMENT_CHECK_LABEL',
-            description: 'TEXT_PAYMENT_CHECK_DESCRIPTION',
-        },
-        {
-            name: 'cash',
-            label: 'TEXT_PAYMENT_CASH_LABEL',
-            description: 'TEXT_PAYMENT_CASH_DESCRIPTION',
-        },
+        // {
+        //     name: 'bank',
+        //     label: 'TEXT_PAYMENT_BANK_LABEL',
+        //     description: 'TEXT_PAYMENT_BANK_DESCRIPTION',
+        // },
+        // {
+        //     name: 'check',
+        //     label: 'TEXT_PAYMENT_CHECK_LABEL',
+        //     description: 'TEXT_PAYMENT_CHECK_DESCRIPTION',
+        // },
+        // {
+        //     name: 'cash',
+        //     label: 'TEXT_PAYMENT_CASH_LABEL',
+        //     description: 'TEXT_PAYMENT_CASH_DESCRIPTION',
+        // },
         {
             name: 'paypal',
             label: 'TEXT_PAYMENT_PAYPAL_LABEL',

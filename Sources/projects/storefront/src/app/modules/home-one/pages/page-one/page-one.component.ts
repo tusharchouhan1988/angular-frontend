@@ -15,6 +15,7 @@ interface ProductsCarouselGroup extends SectionHeaderGroup {
 interface ProductsCarouselData {
     subject$: BehaviorSubject<ProductsCarouselGroup>;
     products$: Observable<Product[]>;
+    //products$: Observable<any>;
     loading: boolean;
     groups: ProductsCarouselGroup[];
 }
@@ -36,7 +37,7 @@ interface DeferredData<T> {
     styleUrls: ['./page-one.component.scss'],
 })
 export class PageOneComponent implements OnInit {
-    featuredProducts: ProductsCarouselData;
+    featuredProducts: any;
 
     blockSale: DeferredData<Product[]>;
 
@@ -63,19 +64,28 @@ export class PageOneComponent implements OnInit {
                 label: 'All',
                 products$: this.shopApi.getFeaturedProducts(null, 8),
             },
-            {
-                label: 'Power Tools',
-                products$: this.shopApi.getFeaturedProducts('power-tools', 8),
-            },
-            {
-                label: 'Hand Tools',
-                products$: this.shopApi.getFeaturedProducts('hand-tools', 8),
-            },
-            {
-                label: 'Plumbing',
-                products$: this.shopApi.getFeaturedProducts('plumbing', 8),
-            },
+            // {
+            //     label: 'Power Tools',
+            //     products$: this.shopApi.getFeaturedProducts('power-tools', 8),
+            // },
+            // {
+            //     label: 'Hand Tools',
+            //     products$: this.shopApi.getFeaturedProducts('hand-tools', 8),
+            // },
+            // {
+            //     label: 'Plumbing',
+            //     products$: this.shopApi.getFeaturedProducts('plumbing', 8),
+            // },
         ]);
+
+        console.log("==1_111111==");
+       console.log(this.featuredProducts.groups[0]);
+        console.log("==1_111111==");
+
+
+        console.log("this.shopApi.getFeaturedProducts(null, 8)");
+        console.log(this.shopApi.getFeaturedProducts(null, 8));
+        console.log("this.shopApi.getFeaturedProducts(null, 8)");
 
         this.blockSale = this.makeDeferredData(this.shopApi.getSpecialOffers(8));
 

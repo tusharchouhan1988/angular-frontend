@@ -1,3 +1,4 @@
+import { Component, HostBinding } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { ProductsList, ReviewsList } from '../../app/interfaces/list';
 import { Product } from '../../app/interfaces/product';
@@ -23,6 +24,25 @@ import { CheckFilterBuilder } from '../filters/check-filter-builder';
 import { RadioFilterBuilder } from '../filters/radio-filter-builder';
 import { RatingFilterBuilder } from '../filters/rating-filter-builder';
 import { ColorFilterBuilder } from '../filters/color-filter-builder';
+import { HeaderService } from '../../app/services/header.service';
+
+@Component({
+    template: ''
+})
+export class xyz {
+    constructor(
+        private header: HeaderService,
+    ) {}
+
+    ngOnInit(): void {
+        this.header.viewAllProduct().subscribe(data => {
+            console.log("====data===");
+          console.log(data);
+        })
+
+        console.log("aaaaaaaaaaa");
+    }
+}
 
 function getProducts(shift: number, categorySlug: string = null): Product[] {
     switch (categorySlug) {
@@ -33,7 +53,9 @@ function getProducts(shift: number, categorySlug: string = null): Product[] {
         case 'engine-drivetrain':
         case 'plumbing': shift += 15; break;
     }
-
+// console.log(categorySlug);
+// console.log(dbProducts.slice(shift));
+// console.log(dbProducts.slice(0, shift));
     return [...dbProducts.slice(shift), ...dbProducts.slice(0, shift)];
 }
 
@@ -173,11 +195,33 @@ export function getRelatedProducts(productId: number, limit: number): Observable
     return of(clone(dbProducts.slice(0, limit)));
 }
 
-export function getFeaturedProducts(categorySlug: string, limit: number): Observable<Product[]> {
-    limit = limit || 8;
+// export function getFeaturedProducts(categorySlug: string, limit: number): Observable<Product[]> {
+//     limit = limit || 8;
 
-    return delayResponse(of(clone(getProducts(0, categorySlug).slice(0, limit))), 1000);
+//     return delayResponse(of(clone(getProducts(0, categorySlug).slice(0, limit))), 1000);
+// }
+
+//MY code//
+export function getFeaturedProducts(categorySlug: string, limit: number, productData: any): Observable<any> {
+    limit = limit || 8;
+    switch (categorySlug) {
+        case 'tires-wheels':
+        case 'power-tools': limit += 5; break;
+        case 'interior-parts':
+        case 'hand-tools': limit += 10; break;
+        case 'engine-drivetrain':
+        case 'plumbing': limit += 15; break;
+    }
+    [...productData.slice(limit), ...productData.slice(8, limit)];
+
+console.log("h");
+    console.log(productData);
+    console.log("h");
+
+
+    return delayResponse(of(clone(productData)), 1000);
 }
+//MY code//
 
 export function getPopularProducts(categorySlug: string, limit: number): Observable<Product[]> {
     limit = limit || 8;

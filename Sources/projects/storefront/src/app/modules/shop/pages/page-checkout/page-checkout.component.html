@@ -34,7 +34,7 @@
                         ></app-address-form>
 
                         <div class="form-group">
-                            <div class="form-check">
+                            <!-- <div class="form-check">
                                 <app-checkbox
                                     class="form-check-input"
                                     formControlName="createAccount"
@@ -43,12 +43,14 @@
                                 <label class="form-check-label" [htmlFor]="checkboxCreateAccount.inputId">
                                     {{ 'INPUT_CREATE_ACCOUNT_LABEL'|translate }}
                                 </label>
-                            </div>
+                            </div> -->
 
+                            <!-- here i change the value of appCollapseItemIsOpen from checkboxCreateAccount.checked to false-->
                             <div
                                 class="collapse-area"
                                 appCollapseItem="collapse-area--open"
-                                [appCollapseItemIsOpen]="checkboxCreateAccount.checked"
+                                [appCollapseItemIsOpen]="false"
+                                
                             >
                                 <div class="pt-2"></div>
 
@@ -59,7 +61,7 @@
                                 ></app-register-form>
                             </div>
 
-                            <div class="form-check mt-1">
+                            <!-- <div class="form-check mt-1">
                                 <app-checkbox
                                     class="form-check-input"
                                     formControlName="shipToDifferentAddress"
@@ -68,12 +70,14 @@
                                 <label class="form-check-label" [htmlFor]="checkboxDifferentAddress.inputId">
                                     {{ 'INPUT_SHIP_TO_DIFFERENT_ADDRESS_LABEL'|translate }}
                                 </label>
-                            </div>
+                            </div> -->
 
+                            <!-- here i change the value of appCollapseItemIsOpen from checkboxDifferentAddress.checked to false-->
+                            
                             <div
                                 class="collapse-area"
                                 appCollapseItem="collapse-area--open"
-                                [appCollapseItemIsOpen]="checkboxDifferentAddress.checked"
+                                [appCollapseItemIsOpen]="false"
                             >
                                 <div class="pt-2"></div>
 
@@ -126,10 +130,10 @@
                                 <th>{{ 'TABLE_SUBTOTAL'|translate }}</th>
                                 <td>{{ cart.subtotal$|async|currencyFormat }}</td>
                             </tr>
-                            <tr *ngFor="let total of cart.totals$|async">
+                            <!-- <tr *ngFor="let total of cart.totals$|async">
                                 <th>{{ 'TABLE_TOTAL_' + total.title|translate }}</th>
                                 <td>{{ total.price|currencyFormat }}</td>
-                            </tr>
+                            </tr> -->
                             </tbody>
                             <tfoot class="checkout__totals-footer">
                             <tr>

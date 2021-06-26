@@ -1,198 +1,223 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+
 import { ProductAttributesDef, ProductDef } from '../interfaces/product-def';
 import { Product, ProductAttribute } from '../../app/interfaces/product';
-import { Brand } from '../../app/interfaces/brand';
-import { brands } from './brands';
-import { ShopCategory } from '../../app/interfaces/category';
-import { shopCategoriesList } from './categories';
-import { prepareCategory } from '../endpoints/categories';
+// import { Brand } from '../../app/interfaces/brand';
+// import { brands } from './brands';
+
+
+
+// import { ShopCategory } from '../../app/interfaces/category';
+// import { shopCategoriesList } from './categories';
+// import { prepareCategory } from '../endpoints/categories';
+
+
+
 import { nameToSlug } from '../utils';
+import { HeaderService } from '../../app/services/header.service';
+
+// function prodGetAllProdFunction(){
+//     this.HeaderService.viewAllProduct().subscribe(data => {
+//         console.log(data);
+//       })
+// }
+
+// let fdata = prodGetAllProdFunction();
+// console.log(fdata);
 
 let lastId = 0;
 
-function resolveProductAttributesDef(attributesDef: ProductAttributesDef): ProductAttribute[] {
-    const attributes: ProductAttribute[] = [];
 
-    for (const attributeName of Object.keys(attributesDef)) {
-        const attribute: ProductAttribute = {
-            name: attributeName,
-            slug: nameToSlug(attributeName),
-            featured: false,
-            values: [],
-        };
 
-        const valuesDef = attributesDef[attributeName];
-        let valueNames: string[] = [];
+// START remove this code as it is extra when i remove  featuredAttributes  from shared/components/product-cart/product-cart-component.html
 
-        if (typeof valuesDef === 'string') {
-            valueNames = [valuesDef];
-        } else {
-            if (valuesDef[0] === true) {
-                attribute.featured = true;
-                valuesDef.splice(0, 1);
-            }
+// function resolveProductAttributesDef(attributesDef: ProductAttributesDef): ProductAttribute[] {
+//     const attributes: ProductAttribute[] = [];
 
-            valueNames = valuesDef as string[];
-        }
 
-        valueNames.forEach(valueName => {
-            attribute.values.push({
-                name: valueName,
-                slug: nameToSlug(valueName),
-            });
-        });
 
-        if (attribute.values.length > 0) {
-            attributes.push(attribute);
-        }
-    }
+//     console.log("attributesDef");
+//     console.log(attributesDef);
+//     console.log("attributesDef");
 
-    return attributes;
-}
+//     for (const attributeName of Object.keys(attributesDef)) {
+//         const attribute: ProductAttribute = {
+//             name: attributeName,
+//             slug: nameToSlug(attributeName),
+//             featured: false,
+//             values: [],
+//         };
+
+//         const valuesDef = attributesDef[attributeName];
+//         let valueNames: string[] = [];
+
+//         if (typeof valuesDef === 'string') {
+//             valueNames = [valuesDef];
+//         } else {
+//             if (valuesDef[0] === true) {
+//                 attribute.featured = true;
+//                 valuesDef.splice(0, 1);
+//             }
+
+//             valueNames = valuesDef as string[];
+//         }
+
+//         valueNames.forEach(valueName => {
+//             attribute.values.push({
+//                 name: valueName,
+//                 slug: nameToSlug(valueName),
+//             });
+//         });
+
+//         if (attribute.values.length > 0) {
+//             attributes.push(attribute);
+//         }
+//     }
+
+//     return attributes;
+// }
+
+// END remove this code as it is extra when i remove  featuredAttributes  from shared/components/product-cart/product-cart-component.html
 
 function makeProducts(defs: ProductDef[]): Product[] {
     return defs.map(def => {
-        let badges = [];
+        // let badges = [];
 
-        if (def.badges) {
-            if (typeof def.badges === 'string') {
-                badges = [def.badges];
-            } else {
-                badges = def.badges.slice(0);
-            }
-        }
+        // if (def.badges) {
+        //     if (typeof def.badges === 'string') {
+        //         badges = [def.badges];
+        //     } else {
+        //         badges = def.badges.slice(0);
+        //     }
+        // }
 
-        let brand: Brand = {
-            slug: 'brandix',
-            name: 'Brandix',
-            image: '',
-            country: 'JP',
-        };
+        // let brand: Brand = {
+        //     slug: 'brandix',
+        //     name: 'Brandix',
+        //     image: '',
+        //     country: 'JP',
+        // };
 
-        if (def.brand) {
-            brand = brands.find(x => x.slug === def.brand) || brand;
-        }
+        // if (def.brand) {
+        //     brand = brands.find(x => x.slug === def.brand) || brand;
+        // }
 
-        const categorySlugs: string[] = def.categories || ['tools-garage'];
-        const categories: ShopCategory[] = categorySlugs.map(categorySlug => {
-            return shopCategoriesList.find(x => x.slug === categorySlug);
-        }).map(x => prepareCategory(x));
+        // const categorySlugs: string[] = def.categories || ['tools-garage'];
+        // const categories: ShopCategory[] = categorySlugs.map(categorySlug => {
+        //     return shopCategoriesList.find(x => x.slug === categorySlug);
+        // }).map(x => prepareCategory(x));
 
-
-        const attributesDef: ProductAttributesDef = {
-            Speed: [true, '750 RPM'],
-            'Power Source': [true, 'Cordless-Electric'],
-            'Battery Cell Type': [true, 'Lithium'],
-            Voltage: [true, '20 Volts'],
-            'Battery Capacity': [true, '2 Ah'],
-            Material: ['Aluminium', 'Plastic'],
-            'Engine Type': 'Brushless',
-            Length: '99 mm',
-            Width: '207 mm',
-            Height: '208 mm',
-        };
+// START: featuredAttributes  from shared/components/product-cart/product-cart-component.html:- as used in resolveProductAttributesDef
+        // const attributesDef: ProductAttributesDef = {
+        //     Speed: [true, '750 RPM'],
+        //     'Power Source': [true, 'Cordless-Electric'],
+        //     'Battery Cell Type': [true, 'Lithium'],
+        //     Voltage: [true, '20 Volts'],
+        //     'Battery Capacity': [true, '2 Ah'],
+        //     Material: ['Aluminium', 'Plastic'],
+        //     'Engine Type': 'Brushless',
+        //     Length: '99 mm',
+        //     Width: '207 mm',
+        //     Height: '208 mm',
+        // };
+// END: featuredAttributes  from shared/components/product-cart/product-cart-component.html:- as used in resolveProductAttributesDef
 
         return {
             id: ++lastId,
             name: def.name,
-            excerpt: `
-                Many philosophical debates that began in ancient times are still debated today. In one general sense,
-                philosophy is associated with wisdom, intellectual culture and a search for knowledge.
-            `,
+
+            // excerpt: `
+            //     Many philosophical debates that began in ancient times are still debated today. In one general sense,
+            //     philosophy is associated with wisdom, intellectual culture and a search for knowledge.
+            // `,
+
             description: `
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum, diam non iaculis finibus,
-                    ipsum arcu sollicitudin dolor, ut cursus sapien sem sed purus. Donec vitae fringilla tortor, sed
-                    fermentum nunc. Suspendisse sodales turpis dolor, at rutrum dolor tristique id. Quisque pellentesque
-                    ullamcorper felis, eget gravida mi elementum a. Maecenas consectetur volutpat ante, sit amet molestie
-                    urna luctus in. Nulla eget dolor semper urna malesuada dictum. Duis eleifend pellentesque dui et
-                    finibus. Pellentesque dapibus dignissim augue. Etiam odio est, sodales ac aliquam id, iaculis eget
-                    lacus. Aenean porta, ante vitae suscipit pulvinar, purus dui interdum tellus, sed dapibus mi mauris
-                    vitae tellus.
-                </p>
-                <h4>Etiam lacus lacus mollis in mattis</h4>
-                <p>
-                    Praesent mattis eget augue ac elementum. Maecenas vel ante ut enim mollis accumsan. Vestibulum vel
-                    eros at mi suscipit feugiat. Sed tortor purus, vulputate et eros a, rhoncus laoreet orci. Proin sapien
-                    neque, commodo at porta in, vehicula eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et
-                    ultrices posuere cubilia Curae; Curabitur porta vulputate augue, at sollicitudin nisl molestie eget.
-                </p>
-                <p>
-                    Nunc sollicitudin, nunc id accumsan semper, libero nunc aliquet nulla, nec pretium ipsum risus ac
-                    neque. Morbi eu facilisis purus. Quisque mi tortor, cursus in nulla ut, laoreet commodo quam.
-                    Pellentesque et ornare sapien. In ac est tempus urna tincidunt finibus. Integer erat ipsum, tristique
-                    ac lobortis sit amet, dapibus sit amet purus. Nam sed lorem nisi. Vestibulum ultrices tincidunt turpis,
-                    sit amet fringilla odio scelerisque non.
+                    Lorem ipsum dolor sit amet, ................description
                 </p>
             `,
             slug: def.slug,
             sku: def.sku,
-            partNumber: 'BDX-750Z370-S',
+            // partNumber: 'BDX-750Z370-S',
             stock: 'in-stock',
             price: def.price,
             compareAtPrice: def.compareAtPrice || null,
             images: def.images.slice(0),
-            badges,
+            //badges,
             rating: def.rating,
             reviews: def.reviews,
             availability: def.availability,
             compatibility: def.compatibility || 'all',
-            brand,
-            type: {
-                slug: 'default',
-                name: 'Default',
-                attributeGroups: [
-                    {
-                        name: 'General',
-                        slug: 'general',
-                        attributes: [
-                            'speed',
-                            'power-source',
-                            'battery-cell-type',
-                            'voltage',
-                            'battery-capacity',
-                            'material',
-                            'engine-type',
-                        ],
-                    },
-                    {
-                        name: 'Dimensions',
-                        slug: 'dimensions',
-                        attributes: [
-                            'length',
-                            'width',
-                            'height',
-                        ],
-                    },
-                ],
-            },
-            attributes: resolveProductAttributesDef(
-                Object.assign({}, attributesDef, def.attributes),
-            ),
-            options: [
-                {
-                    type: 'default',
-                    slug: 'material',
-                    name: 'Material',
-                    values: [
-                        {slug: 'steel', name: 'Steel'},
-                        {slug: 'aluminium', name: 'Aluminium'},
-                        {slug: 'thorium', name: 'Thorium'},
-                    ],
-                },
-                {
-                    type: 'color',
-                    slug: 'color',
-                    name: 'Color',
-                    values: [
-                        {slug: 'white', name: 'White', color: '#fff'},
-                        {slug: 'yellow', name: 'Yellow', color: '#ffd333'},
-                        {slug: 'red', name: 'Red', color: '#ff4040'},
-                        {slug: 'blue', name: 'Blue', color: '#4080ff'},
-                    ],
-                },
-            ],
-            tags: ['Brake Kit', 'Brandix', 'Filter', 'Bumper', 'Transmission', 'Hood'],
-            categories,
+            //brand,
+
+
+
+            // type: {
+            //     slug: 'default',
+            //     name: 'Default',
+            //     attributeGroups: [
+            //         {
+            //             name: 'General',
+            //             slug: 'general',
+            //             attributes: [
+            //                 'speed',
+            //                 'power-source',
+            //                 'battery-cell-type',
+            //                 'voltage',
+            //                 'battery-capacity',
+            //                 'material',
+            //                 'engine-type',
+            //             ],
+            //         },
+            //         {
+            //             name: 'Dimensions',
+            //             slug: 'dimensions',
+            //             attributes: [
+            //                 'length',
+            //                 'width',
+            //                 'height',
+            //             ],
+            //         },
+            //     ],
+            // },
+
+
+
+            // attributes: resolveProductAttributesDef(
+            //     Object.assign({}, attributesDef, def.attributes),
+            // ),
+
+
+
+            // options: [
+            //     {
+            //         type: 'default',
+            //         slug: 'material',
+            //         name: 'Material',
+            //         values: [
+            //             {slug: 'steel', name: 'Steel'},
+            //             {slug: 'aluminium', name: 'Aluminium'},
+            //             {slug: 'thorium', name: 'Thorium'},
+            //         ],
+            //     },
+            //     {
+            //         type: 'color',
+            //         slug: 'color',
+            //         name: 'Color',
+            //         values: [
+            //             {slug: 'white', name: 'White', color: '#fff'},
+            //             {slug: 'yellow', name: 'Yellow', color: '#ffd333'},
+            //             {slug: 'red', name: 'Red', color: '#ff4040'},
+            //             {slug: 'blue', name: 'Blue', color: '#4080ff'},
+            //         ],
+            //     },
+            // ],
+
+            // tags: ['Brake Kit', 'Brandix', 'Filter', 'Bumper', 'Transmission', 'Hood'],
+
+            //categories,
             customFields: {},
         };
     });
@@ -213,9 +238,9 @@ const productsDef: ProductDef[] = [
         reviews: 3,
         availability: 'in-stock',
         compatibility: [1, 2],
-        attributes: {
-            Color: 'White',
-        },
+        // attributes: {
+        //     Color: 'White',
+        // },
     },
     {
         name: 'Brandix Brake Kit BDX-750Z370-S',
@@ -230,9 +255,9 @@ const productsDef: ProductDef[] = [
         reviews: 22,
         availability: 'in-stock',
         compatibility: [1],
-        attributes: {
-            Color: 'Silver',
-        },
+        // attributes: {
+        //     Color: 'Silver',
+        // },
     },
     {
         name: 'Left Headlight Of Brandix Z54',
@@ -248,9 +273,9 @@ const productsDef: ProductDef[] = [
         rating: 3,
         reviews: 14,
         availability: 'in-stock',
-        attributes: {
-            Color: 'Red',
-        },
+        // attributes: {
+        //     Color: 'Red',
+        // },
     },
     {
         name: 'Glossy Gray 19\' Aluminium Wheel AR-19',
@@ -266,9 +291,9 @@ const productsDef: ProductDef[] = [
         reviews: 26,
         availability: 'in-stock',
         compatibility: 'unknown',
-        attributes: {
-            Color: 'Black',
-        },
+        // attributes: {
+        //     Color: 'Black',
+        // },
     },
     {
         name: 'Twin Exhaust Pipe From Brandix Z54',
@@ -283,9 +308,9 @@ const productsDef: ProductDef[] = [
         reviews: 9,
         availability: 'in-stock',
         brand: 'red-gate',
-        attributes: {
-            Color: 'Light Gray',
-        },
+        // attributes: {
+        //     Color: 'Light Gray',
+        // },
     },
     {
         name: 'Motor Oil Level 5',

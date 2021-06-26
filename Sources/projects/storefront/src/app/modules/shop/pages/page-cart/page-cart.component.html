@@ -82,7 +82,7 @@
                             </td>
                         </tr>
                         </tbody>
-                        <tfoot class="cart-table__foot">
+                        <!-- <tfoot class="cart-table__foot">
                         <tr>
                             <td colspan="6">
                                 <div class="cart-table__actions">
@@ -109,7 +109,7 @@
                                 </div>
                             </td>
                         </tr>
-                        </tfoot>
+                        </tfoot> -->
                     </table>
                 </div>
                 <div class="cart__totals">
@@ -125,7 +125,7 @@
                                 </tr>
                                 </thead>
                                 <tbody *ngIf="(cart.totals$|async).length">
-                                <tr *ngFor="let total of cart.totals$|async">
+                                <!-- <tr *ngFor="let total of cart.totals$|async">
                                     <th>{{ 'TABLE_TOTAL_' + total.title|translate }}</th>
                                     <td>
                                         {{ total.price|currencyFormat }}
@@ -133,7 +133,7 @@
                                             <a href="" (click)="$event.preventDefault()">{{ 'LINK_CALCULATE_SHIPPING'|translate }}</a>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr> -->
                                 </tbody>
                                 <tfoot>
                                 <tr>

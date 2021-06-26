@@ -153,7 +153,7 @@ export class BlockProductsCarouselComponent implements OnChanges, OnInit, OnDest
             this.columns = [];
 
             if (this.products && this.rows > 0) {
-                const products = this.products.slice();
+                const products = this.products;
 
                 while (products.length > 0) {
                     this.columns.push(products.splice(0, this.rows));

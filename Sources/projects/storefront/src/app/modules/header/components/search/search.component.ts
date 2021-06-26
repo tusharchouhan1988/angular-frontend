@@ -125,8 +125,8 @@ export class SearchComponent implements OnInit, OnDestroy, AfterViewInit {
 
         this.zone.runOutsideAngular(() => {
             fromOutsideClick([
-                this.selectVehicleButton.nativeElement,
-                this.vehiclePickerDropdown.nativeElement,
+                //this.selectVehicleButton.nativeElement,
+                //this.vehiclePickerDropdown.nativeElement,
             ]).pipe(
                 filter(() => this.vehiclePickerIsOpen),
                 takeUntil(this.destroy$),
